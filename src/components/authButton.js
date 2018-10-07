@@ -15,6 +15,7 @@ class Auth extends React.Component {
       .then(function(result) {
         const user = result.user;
         self.props.signedIn(user);
+        window.location = '/interview/Web'
       })
       .catch(function(error) {
         throw Error(error);
@@ -24,7 +25,7 @@ class Auth extends React.Component {
   render() {
     return (
       <Button onClick={this.handleSignIn}>
-        Sign In
+        Sign In 
       </Button>
     );
   }

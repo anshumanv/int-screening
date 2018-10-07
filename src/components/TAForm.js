@@ -60,7 +60,7 @@ class DynamicFieldSet extends React.Component {
       console.log(Question)
       const newTAQ = firebase.database().ref().child('TAQ').push().key;
       let updates = {}
-      updates['/TAQ/' + Question.domain] = Question;
+      updates['/TAQ/' + Question.domain + '/' + newTAQ] = Question;
       firebase.database().ref().update(updates);
 
       document.querySelector('.question').value='';

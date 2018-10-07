@@ -19,11 +19,10 @@ class Quiz extends Component {
   componentDidMount() {
     const domain = window.location.pathname.split('/')[2];
     
-    firebase.database().ref(`/Questions/${domain}/`).on('value', snap => {
+    firebase.database().ref(`/TAQ/${domain}/`).on('value', snap => {
       const questions = snap.val();
       this.setState({
         questions,
-        questionText: questions['1']['question']
       })
     })
     
