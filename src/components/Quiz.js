@@ -1,44 +1,59 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import {Radio} from 'antd';
 import Question from './Question';
-import QuestionCount from './QuestionCount';
-import AnswerOption from './AnswerOption';
+import * as firebase from 'firebase';
 
-function Quiz(props) {
-    function renderAnswerOptions(key) {
-        return (
-          <AnswerOption
-            key={key.content}
-            answerContent={key.content}
-            answerType={key.type}
-            answer={props.answer}
-            questionId={props.questionId}
-            onAnswerSelected={props.onAnswerSelected}
-          />
-        );
-      }
-    return (
-       <div className="quiz">
-         <QuestionCount
-           counter={props.questionId}
-           total={props.questionTotal}
-         />
-         <Question content={props.question} />
-         <ul className="answerOptions">
-           {props.answerOptions.map(renderAnswerOptions)}
-         </ul>
-       </div>
-    );
+class Quiz extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      questions: [],
+      qIndex: 0,
+      questionText: '',
+      questionAns: '',
+      totalWeight: 0,
+      curQuestion: {},
+    }
   }
 
-  Quiz.propTypes = {
-    answer: PropTypes.string.isRequired,
-    answerOptions: PropTypes.array.isRequired,
-    counter: PropTypes.number.isRequired,
-    question: PropTypes.string.isRequired,
-    questionId: PropTypes.number.isRequired,
-    questionTotal: PropTypes.number.isRequired,
-    onAnswerSelected: PropTypes.func.isRequired
-  };
+  componentDidMount() {
+    const domain = window.location.pathname.split('/')[2];
+    
+    firebase.database().ref(`/Questions/${domain}/`).on('value', snap => {
+      const questions = snap.val();
+      this.setState({
+        questions,
+        questionText: questions['1']['question']
+      })
+    })
+    
+  }
+  // Todo
+  handleSubmit = (e) => {
+    if(e.target.value === this.state.curQuestion['Answer']) {
+      this.setState({
+        qIndex: this.state.qIndex++,
+        questionText: this.state.questions[this.state.qIndex+1]
+      })
+    }
+  }
 
-  export default Quiz;
+  render() {
+    const {questions, qIndex} = this.state;
+    const curQ = questions[qIndex]
+    return (
+        <div className="quiz">
+          <div>Select the appropriate option</div>
+          <Question content={this.state.questionText} />
+          <Radio.Group onChange={this.handleSubmit} buttonStyle="solid">
+            <Radio.Button value="a">curQ['a']</Radio.Button>
+            <Radio.Button value="b">curQ['b']</Radio.Button>
+            <Radio.Button value="c">curQ['c']</Radio.Button>
+            <Radio.Button value="d">curQ['d']</Radio.Button>
+          </Radio.Group>
+        </div>
+    );
+  }
+}
+
+export default Quiz;

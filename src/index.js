@@ -11,25 +11,31 @@ import Admin from './containers/Admin'
 import Interview from './containers/Interview'
 import { config } from './config'
 import { getStore, getState } from './store/store';
+import Head from './components/Head';
 
+
+// saikou
 firebase.initializeApp(config);
 
 const store = getStore();
 
 ReactDOM.render(<Provider store={store}>
     <BrowserRouter>
-        <Switch>
-        <Route
-            exact
-            path="/"
-            render={() => {
-            return <App />;
-            }}
-        />
-        <Route exact path="/interview/:interviewID" component={Interview}/>
-        <Route exact path="/admin" component={Admin} />
-        <Route exact path="*" component={NotFound } />
-        </Switch>
+        <div>
+            <Head />
+            <Switch>
+            <Route
+                exact
+                path="/"
+                render={() => {
+                return <App />;
+                }}
+            />
+            <Route exact path="/interview/:interviewID" component={Interview}/>
+            <Route exact path="/admin" component={Admin} />
+            <Route exact path="*" component={NotFound } />
+            </Switch>
+        </div>
     </BrowserRouter>
 </Provider>, document.getElementById('root'));
 

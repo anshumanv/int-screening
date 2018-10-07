@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as firebase from 'firebase';
 import { signedIn } from '../actions/authActions';
+import { Button } from 'antd';
 
 class Auth extends React.Component {
   handleSignIn = () => {
@@ -22,9 +23,9 @@ class Auth extends React.Component {
 
   render() {
     return (
-      <button onClick={this.handleSignIn}>
+      <Button onClick={this.handleSignIn}>
         Sign In
-      </button>
+      </Button>
     );
   }
 }

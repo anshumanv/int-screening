@@ -14,24 +14,6 @@ import { getStore, getState } from './store/store';
 // firebase.initializeApp(config);
 
 class App extends Component {
-    componentDidMount() {
-        firebase.auth().onAuthStateChanged(user => {
-            if (user) {
-              firebase.database().ref('/users/').on('value', snapshot => {
-                if (!snapshot.hasChild(user.uid)) {
-                  firebase.database().ref('/users/' + user.uid).set({
-                    email: user.email,
-                    name: user.displayName,
-                    uid: user.uid
-                  })
-                }
-              });
-              this.props.signedIn(user);
-            } else {
-              this.props.signedOut();
-            }
-      });
-    }
     render() {
         return(
             <Start />
@@ -39,19 +21,5 @@ class App extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-      signedIN: state.auth.signedIn,
-    };
-};
-
-
-export default
-    connect(
-      mapStateToProps,
-      {
-        signedIn,
-        signedOut,
-      },
-    )(App);
+export default App;
 
