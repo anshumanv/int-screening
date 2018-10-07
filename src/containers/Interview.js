@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Quiz from '../components/Quiz'
+import Questions from '../components/Question'
 
 export default class Interview extends Component {
     constructor(props) {
@@ -11,7 +12,7 @@ export default class Interview extends Component {
     render() {
         return(
             <div>
-                <Quiz/>
+                <Questions/>
                 This is interview {this.state.amount}
             </div>
         )
