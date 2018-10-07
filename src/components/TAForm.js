@@ -12,6 +12,7 @@ class DynamicFieldSet extends React.Component {
 
 	 state = {
     	value: 1,
+    	count:0,
   	}
   remove = (k) => {
     const { form } = this.props;
@@ -57,11 +58,20 @@ class DynamicFieldSet extends React.Component {
 
 	    console.log(Question)
 
+	    document.querySelector('.question').value='';
+	    document.querySelector('.optionA').value='';
+	    document.querySelector('.optionB').value='';
+	    document.querySelector('.optionC').value='';
+	    document.querySelector('.optionD').value='';
+	    document.querySelector('.correct').value='';
+	    document.querySelector('.tags').value='';
+
       if (!err) {
         console.log('Received values of form: ', values);
         console.log('Questions asked: ',values.names);
       }
     });
+
   }
 
   render() {
@@ -102,7 +112,7 @@ class DynamicFieldSet extends React.Component {
             }],
           })(
           <div>
-            <Input className="question" placeholder="Enter Question" style={{ width: '60%', marginRight: 8 }} /> 
+            <Input className={'question'} placeholder="Enter Question" style={{ width: '60%', marginRight: 8 }} /> 
             <Input className="optionA" placeholder="Enter Option A" style={{ width: '60%', marginRight: 8 }} /> 
             <Input className="optionB" placeholder="Enter Option B" style={{ width: '60%', marginRight: 8 }} /> 
             <Input className="optionC" placeholder="Enter Option C" style={{ width: '60%', marginRight: 8 }} /> 
@@ -126,12 +136,16 @@ class DynamicFieldSet extends React.Component {
     <div>
     	<h3>Technical Aspect Checking Form</h3>
       <Form onSubmit={this.handleSubmit}>
-        {formItems}
-        <FormItem {...formItemLayoutWithOutLabel}>
-          <Button type="dashed" onClick={this.add} style={{ width: '60%' }}>
-            <Icon type="plus" /> Add Question
-          </Button>
-        </FormItem>
+        
+        <div>
+            <Input className={'question'} placeholder="Enter Question" style={{ width: '60%', marginRight: 8 }} /> 
+            <Input className="optionA" placeholder="Enter Option A" style={{ width: '60%', marginRight: 8 }} /> 
+            <Input className="optionB" placeholder="Enter Option B" style={{ width: '60%', marginRight: 8 }} /> 
+            <Input className="optionC" placeholder="Enter Option C" style={{ width: '60%', marginRight: 8 }} /> 
+            <Input className="optionD" placeholder="Enter Option D" style={{ width: '60%', marginRight: 8 }} />
+            <Input className="correct" placeholder="Correct Option" style= {{ width: '60%', marginRight: 8 }} />
+            <Input className="tags" placeholder="Enter tags" style={{width: '60%', marginRight: 8}} />
+            </div>
         <FormItem {...formItemLayoutWithOutLabel}>
           <Button type="primary" htmlType="submit">Submit</Button>
         </FormItem>
