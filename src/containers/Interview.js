@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Quiz from '../components/Quiz'
 
 export default class Interview extends Component {
     constructor(props) {
@@ -7,12 +8,12 @@ export default class Interview extends Component {
             amount: 10
         }
     };
-    print = () => {
-        console.log('asdasd')
-    };
     render() {
         return(
-            <div onClick={this.print}>This is interview {this.state.amount}</div>
+            <div>
+                <Quiz />
+                This is interview {this.state.amount}
+            </div>
         )
     }
 }
