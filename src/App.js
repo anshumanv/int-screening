@@ -10,6 +10,7 @@ import Interview from './containers/Interview'
 import Start from './containers/Start'
 import { config } from './config'
 import { getStore, getState } from './store/store';
+import './App.css'
 
 // firebase.initializeApp(config);
 
