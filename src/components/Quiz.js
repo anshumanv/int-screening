@@ -21,20 +21,32 @@ class Quiz extends Component {
     
     firebase.database().ref(`/TAQ/${domain}/`).on('value', snap => {
       const questions = snap.val();
+      let qar = []
+      for(let question in questions) {
+        qar.push(questions[question])
+      }
       this.setState({
-        questions,
+        questions: qar
       })
     })
     
   }
   // Todo
   handleSubmit = (e) => {
+    console.log('asda')
+    const newIndex = this.state.qIndex + 1;
     if(e.target.value === this.state.curQuestion['Answer']) {
+      let newWeight = this.state.totalWeight += this.state.questions[this.state.qIndex]['weight']
       this.setState({
-        qIndex: this.state.qIndex++,
-        questionText: this.state.questions[this.state.qIndex+1]
+        totalWeight: newWeight
       })
     }
+    if(this.state.qIndex == this.state.questions.length -1){
+      return window.location.pathname = '/';
+    }
+    this.setState({
+      qIndex: newIndex
+    })
   }
 
   render() {
@@ -42,15 +54,20 @@ class Quiz extends Component {
     const curQ = questions[qIndex]
     return (
         <div className="quiz">
+          {!!questions.length &&
+          <div>
           <div>Select the appropriate option</div>
-          <Question content={this.state.questionText} />
+          <Question content={questions[qIndex]['question']} />
           <Radio.Group onChange={this.handleSubmit} buttonStyle="solid">
-            <Radio.Button value="a">curQ['a']</Radio.Button>
-            <Radio.Button value="b">curQ['b']</Radio.Button>
-            <Radio.Button value="c">curQ['c']</Radio.Button>
-            <Radio.Button value="d">curQ['d']</Radio.Button>
+            <Radio.Button value="a">{questions[qIndex]['optionA']}</Radio.Button>
+            <Radio.Button value="b">{questions[qIndex]['optionB']}</Radio.Button>
+            <Radio.Button value="c">{questions[qIndex]['optionC']}</Radio.Button>
+            <Radio.Button value="d">{questions[qIndex]['optionD']}</Radio.Button>
           </Radio.Group>
+        </div>}
         </div>
+          
+          
     );
   }
 }

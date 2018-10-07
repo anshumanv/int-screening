@@ -22,7 +22,6 @@ class Interview extends Component {
         return(
             <div>
                 <Quiz />
-                This is interview 
             </div>
         )
     }

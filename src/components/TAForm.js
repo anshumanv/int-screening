@@ -47,7 +47,8 @@ class DynamicFieldSet extends React.Component {
     this.props.form.validateFields((err, values) => {
     	var Question = new Object();
       Question.question = document.querySelector('.question').value;
-        Question.domain = document.querySelector('.domain').value
+        Question.domain = document.querySelector('.domain').value;
+        Question.weoght = document.querySelector('.weight').value
       	Question.optionA = document.querySelector('.optionA').value;
       	Question.optionB = document.querySelector('.optionB').value;
       	Question.optionC = document.querySelector('.optionC').value;
@@ -148,6 +149,7 @@ class DynamicFieldSet extends React.Component {
             <Input className="optionC" placeholder="Enter Option C" style={{ width: '60%', marginRight: 8, marginBottom: 8 }} /> 
             <Input className="optionD" placeholder="Enter Option D" style={{ width: '60%', marginRight: 8, marginBottom: 8 }} />
             <Input className="correct" placeholder="Correct Option eg - 'a'" style= {{ width: '60%', marginRight: 8, marginBottom: 8 }} />
+            <Input className="weight" placeholder="Question Weight" style= {{ width: '60%', marginRight: 8, marginBottom: 8 }} />
             <Input className="tags" placeholder="Enter tags" style={{width: '60%', marginRight: 8}} />
             </div>
         <FormItem {...formItemLayoutWithOutLabel}>
