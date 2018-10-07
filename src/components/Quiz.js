@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Radio} from 'antd';
+import {Radio, Button} from 'antd';
 import Question from './Question';
 import * as firebase from 'firebase';
 
@@ -54,17 +54,16 @@ class Quiz extends Component {
     const curQ = questions[qIndex]
     return (
         <div className="quiz">
-          {!!questions.length &&
+          {!!questions.length ?
           <div>
-          <div>Select the appropriate option</div>
           <Question content={questions[qIndex]['question']} />
-          <Radio.Group onChange={this.handleSubmit} buttonStyle="solid">
+          <Radio.Group onChange={this.handleSubmit} className="radio-group" buttonStyle="solid">
             <Radio.Button value="a">{questions[qIndex]['optionA']}</Radio.Button>
             <Radio.Button value="b">{questions[qIndex]['optionB']}</Radio.Button>
             <Radio.Button value="c">{questions[qIndex]['optionC']}</Radio.Button>
             <Radio.Button value="d">{questions[qIndex]['optionD']}</Radio.Button>
           </Radio.Group>
-        </div>}
+        </div>:  <Button shape="circle" loading />}
         </div>
           
           

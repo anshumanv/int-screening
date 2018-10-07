@@ -44,6 +44,10 @@ export default class Admin extends React.Component {
               <Icon type="folder" />
               <span>Questionnaire 3</span>
             </Menu.Item>
+            <Menu.Item key="4">
+              <Icon type="folder" />
+              <span>Responses</span>
+            </Menu.Item>
           </Menu>
         </Sider>
         <Layout>

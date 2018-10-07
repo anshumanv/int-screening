@@ -75,3 +75,49 @@ body {
   background-color: #282c34;
   color: #61dafb;
 }
+
+.ant-layout {
+  height: 100vh;
+}
+
+.start-root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30%
+}
+
+.start-button {
+  margin-bottom: 30px;
+}
+
+.ant-upload.ant-upload-drag .ant-upload {
+  padding: 16px 50px;
+  max-height: 200px;
+}
+
+.auth-root {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.quiz {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.radio-group label {
+  margin: 10px;
+  text-size: 3em;
+}
+
+.question {
+  display: flex;
+  justify-content: center;
+}
