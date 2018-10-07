@@ -6,7 +6,7 @@ class Dummy extends React.Component {
 		if(this.props.currentMenu==="1")
 			return <NewForm/>;
 		else
-			return <div>Question3</div>;
+			return <div>Questions</div>;
 	}
 }
 

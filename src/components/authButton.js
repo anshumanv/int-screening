@@ -3,8 +3,13 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as firebase from 'firebase';
 import { signedIn } from '../actions/authActions';
+import Interview from '../containers/Interview'
 
 class Auth extends React.Component {
+
+  state = {
+    isSignedIn:false,
+  }
   handleSignIn = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     let self = this;
@@ -14,6 +19,7 @@ class Auth extends React.Component {
       .then(function(result) {
         const user = result.user;
         self.props.signedIn(user);
+        self.setState({isSignedIn:true})
       })
       .catch(function(error) {
         throw Error(error);
@@ -21,11 +27,15 @@ class Auth extends React.Component {
   };
 
   render() {
+    if(!this.state.isSignedIn)
     return (
       <button onClick={this.handleSignIn}>
         Sign In
       </button>
     );
+
+    else
+      return <Interview/>
   }
 }
 

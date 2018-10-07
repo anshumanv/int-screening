@@ -11,7 +11,7 @@ export default class Interview extends Component {
     render() {
         return(
             <div>
-                <Quiz />
+                <Quiz/>
                 This is interview {this.state.amount}
             </div>
         )

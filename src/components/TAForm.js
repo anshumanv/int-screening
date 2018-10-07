@@ -111,15 +111,7 @@ class DynamicFieldSet extends React.Component {
               message: "Please write the question or delete this field.",
             }],
           })(
-          <div>
-            <Input className={'question'} placeholder="Enter Question" style={{ width: '60%', marginRight: 8 }} /> 
-            <Input className="optionA" placeholder="Enter Option A" style={{ width: '60%', marginRight: 8 }} /> 
-            <Input className="optionB" placeholder="Enter Option B" style={{ width: '60%', marginRight: 8 }} /> 
-            <Input className="optionC" placeholder="Enter Option C" style={{ width: '60%', marginRight: 8 }} /> 
-            <Input className="optionD" placeholder="Enter Option D" style={{ width: '60%', marginRight: 8 }} />
-            <Input className="correct" placeholder="Correct Option" style= {{ width: '60%', marginRight: 8 }} />
-            <Input className="tags" placeholder="Enter tags" style={{width: '60%', marginRight: 8}} />
-            </div>
+          
           )}
           {keys.length > 1 ? (
             <Icon
