@@ -70,7 +70,7 @@ class DynamicFieldSet extends React.Component {
       return (
         <FormItem
           {...(index === 0 ? formItemLayout : formItemLayoutWithOutLabel)}
-          label={index === 0 ? 'Questions' : ''}
+          label={index === 0 ? 'Question' : ''}
           required={false}
           key={k}
         >
@@ -102,7 +102,8 @@ class DynamicFieldSet extends React.Component {
         {formItems}
         <FormItem {...formItemLayoutWithOutLabel}>
           <Button type="dashed" onClick={this.add} style={{ width: '60%' }}>
-            <Icon type="plus" /> Add field
+            <Icon type="plus" /> Add Question
+
           </Button>
         </FormItem>
         <FormItem {...formItemLayoutWithOutLabel}>
