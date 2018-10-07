@@ -1,6 +1,7 @@
+
 import React from 'react';
 
-import { Form, Input, Icon, Button } from 'antd';
+import { Form, Input, Icon, Button, Radio } from 'antd';
 
 import "../App.css";
 
@@ -8,6 +9,10 @@ const FormItem = Form.Item;
 
 let uuid = 0;
 class DynamicFieldSet extends React.Component {
+
+	 state = {
+    	value: 1,
+  	}
   remove = (k) => {
     const { form } = this.props;
     // can use data-binding to get
@@ -39,6 +44,19 @@ class DynamicFieldSet extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
+    	var Question = new Object();
+    	Question.question = document.querySelector('.question').value;
+      	Question.optionA = document.querySelector('.optionA').value;
+      	Question.optionB = document.querySelector('.optionB').value;
+      	Question.optionC = document.querySelector('.optionC').value;
+      	Question.optionD = document.querySelector('.optionD').value;
+      	Question.correct = document.querySelector('.correct').value;
+      	Question.tags = document.querySelector('.tags').value;
+
+      	//Question{} needs to be send to Firebase
+
+	    console.log(Question)
+
       if (!err) {
         console.log('Received values of form: ', values);
         console.log('Questions asked: ',values.names);
@@ -47,7 +65,7 @@ class DynamicFieldSet extends React.Component {
   }
 
   render() {
-    const { getFieldDecorator, getFieldValue } = this.props.form;
+    const { getFieldDecorator, getFieldValue, getFieldsValue } = this.props.form;
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -57,6 +75,7 @@ class DynamicFieldSet extends React.Component {
         xs: { span: 24 },
         sm: { span: 20 },
       },
+      
     };
     const formItemLayoutWithOutLabel = {
       wrapperCol: {
@@ -82,7 +101,15 @@ class DynamicFieldSet extends React.Component {
               message: "Please write the question or delete this field.",
             }],
           })(
-            <Input placeholder="Enter Question" style={{ width: '60%', marginRight: 8 }} />
+          <div>
+            <Input className="question" placeholder="Enter Question" style={{ width: '60%', marginRight: 8 }} /> 
+            <Input className="optionA" placeholder="Enter Option A" style={{ width: '60%', marginRight: 8 }} /> 
+            <Input className="optionB" placeholder="Enter Option B" style={{ width: '60%', marginRight: 8 }} /> 
+            <Input className="optionC" placeholder="Enter Option C" style={{ width: '60%', marginRight: 8 }} /> 
+            <Input className="optionD" placeholder="Enter Option D" style={{ width: '60%', marginRight: 8 }} />
+            <Input className="correct" placeholder="Correct Option" style= {{ width: '60%', marginRight: 8 }} />
+            <Input className="tags" placeholder="Enter tags" style={{width: '60%', marginRight: 8}} />
+            </div>
           )}
           {keys.length > 1 ? (
             <Icon
@@ -97,7 +124,7 @@ class DynamicFieldSet extends React.Component {
     });
     return (
     <div>
-    	<h3>Behavioural Aspect Checking Form</h3>
+    	<h3>Technical Aspect Checking Form</h3>
       <Form onSubmit={this.handleSubmit}>
         {formItems}
         <FormItem {...formItemLayoutWithOutLabel}>
