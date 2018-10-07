@@ -2,7 +2,7 @@
 import React from 'react';
 
 import { Form, Input, Icon, Button, Radio } from 'antd';
-
+import * as firebase from 'firebase';
 import "../App.css";
 
 const FormItem = Form.Item;
@@ -46,7 +46,8 @@ class DynamicFieldSet extends React.Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
     	var Question = new Object();
-    	Question.question = document.querySelector('.question').value;
+      Question.question = document.querySelector('.question').value;
+        Question.domain = document.querySelector('.domain').value
       	Question.optionA = document.querySelector('.optionA').value;
       	Question.optionB = document.querySelector('.optionB').value;
       	Question.optionC = document.querySelector('.optionC').value;
@@ -56,9 +57,14 @@ class DynamicFieldSet extends React.Component {
 
       	//Question{} needs to be send to Firebase
 
-	    console.log(Question)
+      console.log(Question)
+      const newTAQ = firebase.database().ref().child('TAQ').push().key;
+      let updates = {}
+      updates['/TAQ/' + Question.domain] = Question;
+      firebase.database().ref().update(updates);
 
-	    document.querySelector('.question').value='';
+      document.querySelector('.question').value='';
+      document.querySelector('.domain').value='';
 	    document.querySelector('.optionA').value='';
 	    document.querySelector('.optionB').value='';
 	    document.querySelector('.optionC').value='';
@@ -66,10 +72,6 @@ class DynamicFieldSet extends React.Component {
 	    document.querySelector('.correct').value='';
 	    document.querySelector('.tags').value='';
 
-      if (!err) {
-        console.log('Received values of form: ', values);
-        console.log('Questions asked: ',values.names);
-      }
     });
 
   }
@@ -112,6 +114,7 @@ class DynamicFieldSet extends React.Component {
             }],
           })(
           <div>
+            <Input className={'domain'} placeholder="Enter Domain" style={{ width: '60%', marginRight: 8 }} />
             <Input className={'question'} placeholder="Enter Question" style={{ width: '60%', marginRight: 8 }} /> 
             <Input className="optionA" placeholder="Enter Option A" style={{ width: '60%', marginRight: 8 }} /> 
             <Input className="optionB" placeholder="Enter Option B" style={{ width: '60%', marginRight: 8 }} /> 
@@ -119,7 +122,7 @@ class DynamicFieldSet extends React.Component {
             <Input className="optionD" placeholder="Enter Option D" style={{ width: '60%', marginRight: 8 }} />
             <Input className="correct" placeholder="Correct Option" style= {{ width: '60%', marginRight: 8 }} />
             <Input className="tags" placeholder="Enter tags" style={{width: '60%', marginRight: 8}} />
-            </div>
+          </div>
           )}
           {keys.length > 1 ? (
             <Icon
@@ -138,12 +141,13 @@ class DynamicFieldSet extends React.Component {
       <Form onSubmit={this.handleSubmit}>
         
         <div>
-            <Input className={'question'} placeholder="Enter Question" style={{ width: '60%', marginRight: 8 }} /> 
-            <Input className="optionA" placeholder="Enter Option A" style={{ width: '60%', marginRight: 8 }} /> 
-            <Input className="optionB" placeholder="Enter Option B" style={{ width: '60%', marginRight: 8 }} /> 
-            <Input className="optionC" placeholder="Enter Option C" style={{ width: '60%', marginRight: 8 }} /> 
-            <Input className="optionD" placeholder="Enter Option D" style={{ width: '60%', marginRight: 8 }} />
-            <Input className="correct" placeholder="Correct Option" style= {{ width: '60%', marginRight: 8 }} />
+        <Input className={'domain'} placeholder="Enter Domain" style={{ width: '60%', marginRight: 8, marginBottom: 8 }} />
+            <Input className={'question'} placeholder="Enter Question" style={{ width: '60%', marginRight: 8, marginBottom: 8 }} /> 
+            <Input className="optionA" placeholder="Enter Option A" style={{ width: '60%', marginRight: 8, marginBottom: 8 }} /> 
+            <Input className="optionB" placeholder="Enter Option B" style={{ width: '60%', marginRight: 8, marginBottom: 8 }} /> 
+            <Input className="optionC" placeholder="Enter Option C" style={{ width: '60%', marginRight: 8, marginBottom: 8 }} /> 
+            <Input className="optionD" placeholder="Enter Option D" style={{ width: '60%', marginRight: 8, marginBottom: 8 }} />
+            <Input className="correct" placeholder="Correct Option eg - 'a'" style= {{ width: '60%', marginRight: 8, marginBottom: 8 }} />
             <Input className="tags" placeholder="Enter tags" style={{width: '60%', marginRight: 8}} />
             </div>
         <FormItem {...formItemLayoutWithOutLabel}>
