@@ -103,6 +103,10 @@ class DynamicFieldSet extends React.Component {
         <FormItem {...formItemLayoutWithOutLabel}>
           <Button type="dashed" onClick={this.add} style={{ width: '60%' }}>
             <Icon type="plus" /> Add Question
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin
           </Button>
         </FormItem>
         <FormItem {...formItemLayoutWithOutLabel}>

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import Auth from '../components/authButton';
 
 export default class Start extends Component {
     render() {
         return(
-            <div>asdasd</div>
+            <div>dasdasd<Auth /></div>
         )
     }
 }
