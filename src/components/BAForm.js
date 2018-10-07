@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Form, Input, Icon, Button } from 'antd';
-
+import * as firebase from 'firebase';
 import "../App.css";
 
 const FormItem = Form.Item;
@@ -37,13 +37,13 @@ class DynamicFieldSet extends React.Component {
   }
 
   handleSubmit = (e) => {
-    e.preventDefault();
-    this.props.form.validateFields((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values);
-        console.log('Questions asked: ',values.names);
-      }
-    });
+    e.preventDefault()
+    const val = document.querySelector('.baquestion');
+    const newBAQ = firebase.database().ref().child('BAQ').push().key;
+    let updates = {}
+    updates['/BAQ/' + newBAQ] = val.value;
+    firebase.database().ref().update(updates);
+    return document.querySelector('.ant-form').reset()
   }
 
   render() {
@@ -101,10 +101,7 @@ class DynamicFieldSet extends React.Component {
       <Form onSubmit={this.handleSubmit}>
         {formItems}
         <FormItem {...formItemLayoutWithOutLabel}>
-          <Button type="dashed" onClick={this.add} style={{ width: '60%' }}>
-            <Icon type="plus" /> Add Question
-
-          </Button>
+          <Input className="baquestion" placeholder="Enter Question" style={{ width: '60%', marginRight: 8 }} />
         </FormItem>
         <FormItem {...formItemLayoutWithOutLabel}>
           <Button type="primary" htmlType="submit">Submit</Button>
