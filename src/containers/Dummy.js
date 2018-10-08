@@ -28,7 +28,7 @@ class Dummy extends React.Component {
 			const users_obj = snap.val()
 			for(let user in users_obj)
 				{
-					users.push(`${users_obj[user].name} - ${users_obj[user].email}`)
+					users.push(`${users_obj[user].name} - ${users_obj[user].email} - CV: 0.7 - Behavior: 0.8 - Technical:0.9`)
 				}
 		})
 		this.setState({users});
