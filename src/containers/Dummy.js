@@ -9,10 +9,12 @@ class Dummy extends React.Component {
 		this.state = {
 			BAQ: {},
 			questions: [],
+			users:[],
 		}
 	}
 	componentDidMount() {
 		let questions = [];
+		let users = [];
 		firebase.database().ref('BAQ').on('value', snap => {
 			
 			const qobj = snap.val()
@@ -20,14 +22,31 @@ class Dummy extends React.Component {
 				questions.push(qobj[question])
 			}
 		})
+		this.setState({ questions })
+		firebase.database().ref('users').on('value', snap => {
+			const users_obj = snap.val()
+			for(let user in users_obj)
+				{
+					users.push(users_obj[user].name)
+				}
+		})
 		this.setState({
-			questions
+			users
 		})
 	}
 
-	render() {
+	render() {		
 		if(this.props.currentMenu==="1")
 			return <NewForm/>;
+
+		if(this.props.currentMenu==="4")
+			return <List
+			header={<b>Users responses</b>}
+			bordered
+			dataSource={this.state.users}
+			renderItem={item => (<List.Item>{item}</List.Item>)}
+		  />;
+
 		else
 			return  <List
 			header={<b>Behavioral Questions</b>}
