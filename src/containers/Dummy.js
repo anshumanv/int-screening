@@ -7,22 +7,23 @@ class Dummy extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			BAQ: {},
-			questions: [],
+			BAQ: [],
+			TAQ: [],
 			users:[],
 		}
 	}
 	componentDidMount() {
-		let questions = [];
+		let BAQ = [];
+		let TAQ = [];
 		let users = [];
 		firebase.database().ref('BAQ').on('value', snap => {
 			
-			const qobj = snap.val()
+			let qobj = snap.val()
 			for(let question in qobj) {
-				questions.push(qobj[question])
+				BAQ.push(qobj[question])
 			}
 		})
-		this.setState({ questions })
+		this.setState({BAQ});
 		firebase.database().ref('users').on('value', snap => {
 			const users_obj = snap.val()
 			for(let user in users_obj)
@@ -30,12 +31,18 @@ class Dummy extends React.Component {
 					users.push(users_obj[user].name)
 				}
 		})
-		this.setState({
-			users
+		this.setState({users});
+		firebase.database().ref('TAQ').child('Web').on('value', snap => {
+			let qobj = snap.val()
+			for(let question in qobj){
+				TAQ.push(qobj[question].question)
+			}
 		})
+		this.setState({TAQ});
 	}
 
 	render() {		
+		console.log(this.state.TAQ)
 		if(this.props.currentMenu==="1")
 			return <NewForm/>;
 
@@ -46,13 +53,21 @@ class Dummy extends React.Component {
 			dataSource={this.state.users}
 			renderItem={item => (<List.Item>{item}</List.Item>)}
 		  />;
-
-		else
+		
+		  if(this.props.currentMenu==="2")
 			return  <List
 			header={<b>Behavioral Questions</b>}
 			bordered
-			dataSource={this.state.questions}
+			dataSource={this.state.BAQ}
 			renderItem={item => (<List.Item>{item}</List.Item>)}
+		  />;
+
+		  else
+		  	return <List
+		  	header={<b>Technical Questions</b>}
+		  	bordered
+		  	dataSource={this.state.TAQ}
+		  	renderItem={item => (<List.Item>{item}</List.Item>)}
 		  />;
 	}
 }

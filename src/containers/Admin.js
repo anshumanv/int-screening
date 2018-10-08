@@ -38,11 +38,11 @@ export default class Admin extends React.Component {
             </Menu.Item>
             <Menu.Item key="2">
               <Icon type="folder" />
-              <span>Questionnaire 2</span>
+              <span>Former Behavioral Aspect Questions</span>
             </Menu.Item>
             <Menu.Item key="3">
               <Icon type="folder" />
-              <span>Questionnaire 3</span>
+              <span>Former Technical Aspect Questions</span>
             </Menu.Item>
             <Menu.Item key="4">
               <Icon type="folder" />
