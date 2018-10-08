@@ -12,13 +12,11 @@ class Quiz extends Component {
       questionText: '',
       questionAns: '',
       totalWeight: 0,
-      curQuestion: {},
     }
   }
 
   componentDidMount() {
     const domain = window.location.pathname.split('/')[2];
-    
     firebase.database().ref(`/TAQ/${domain}/`).on('value', snap => {
       const questions = snap.val();
       let qar = []
@@ -29,21 +27,22 @@ class Quiz extends Component {
         questions: qar
       })
     })
-    
   }
   // Todo
   handleSubmit = (e) => {
-    console.log('asda')
-    const newIndex = this.state.qIndex + 1;
-    if(e.target.value === this.state.curQuestion['Answer']) {
-      let newWeight = this.state.totalWeight + this.state.questions[this.state.qIndex]['weight']
+    const {questions, qIndex} = this.state;
+    const newIndex = qIndex + 1;
+    if(e.target.value === questions[qIndex]['correct']) {
+      console.log(questions[qIndex]['weight']);
+      let newWeight = this.state.totalWeight + parseInt(questions[qIndex]['weight'])
       this.setState({
         totalWeight: newWeight
       })
     }
-    if(this.state.qIndex == this.state.questions.length -1){
+    if(qIndex === questions.length -1){
       return window.location.pathname = '/';
     }
+    Array.from(document.querySelectorAll('input[type="choices"]:checked'), input => input.checked = false );
     this.setState({
       qIndex: newIndex
     })
@@ -57,12 +56,10 @@ class Quiz extends Component {
           {!!questions.length ?
           <div>
           <Question content={questions[qIndex]['question']} />
-          <Radio.Group onChange={this.handleSubmit} className="radio-group" buttonStyle="solid">
-            <Radio.Button value="a">{questions[qIndex]['optionA']}</Radio.Button>
-            <Radio.Button value="b">{questions[qIndex]['optionB']}</Radio.Button>
-            <Radio.Button value="c">{questions[qIndex]['optionC']}</Radio.Button>
-            <Radio.Button value="d">{questions[qIndex]['optionD']}</Radio.Button>
-          </Radio.Group>
+            <Radio.Button onClick={this.handleSubmit} value="a">{questions[qIndex]['optionA']}</Radio.Button>
+            <Radio.Button onClick={this.handleSubmit} value="b">{questions[qIndex]['optionB']}</Radio.Button>
+            <Radio.Button onClick={this.handleSubmit} value="c">{questions[qIndex]['optionC']}</Radio.Button>
+            <Radio.Button onClick={this.handleSubmit} value="d">{questions[qIndex]['optionD']}</Radio.Button>
         </div>:  <Button shape="circle" loading />}
         </div>
           

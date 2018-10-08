@@ -48,7 +48,7 @@ class DynamicFieldSet extends React.Component {
     	var Question = new Object();
       Question.question = document.querySelector('.question').value;
         Question.domain = document.querySelector('.domain').value;
-        Question.weoght = document.querySelector('.weight').value
+        Question.weight = document.querySelector('.weight').value
       	Question.optionA = document.querySelector('.optionA').value;
       	Question.optionB = document.querySelector('.optionB').value;
       	Question.optionC = document.querySelector('.optionC').value;
@@ -70,7 +70,8 @@ class DynamicFieldSet extends React.Component {
 	    document.querySelector('.optionB').value='';
 	    document.querySelector('.optionC').value='';
 	    document.querySelector('.optionD').value='';
-	    document.querySelector('.correct').value='';
+      document.querySelector('.correct').value='';
+      document.querySelector('.weight').value='';
 	    document.querySelector('.tags').value='';
 
     });

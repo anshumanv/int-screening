@@ -26,8 +26,10 @@ class Start extends Component {
             <div>
                 {!this.props.signedIn ? <Auth />: (
                     <div className = "start-root">
-                        <Link className="start-button" to={'/interview/Web'}><Button>
-                            Take Test</Button>
+                        <Link className="start-button" to={'/interview/Web'}>
+                            <Button type="primary">
+                                Take Test
+                            </Button>
                         </Link>
                             <Dragger {...props}>
                                 <p className="ant-upload-drag-icon">
