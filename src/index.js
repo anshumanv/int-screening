@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import NotFound from './containers/NotFound'
 import Admin from './containers/Admin'
 import Interview from './containers/Interview'
+import Behavior from './containers/Behavior'
 import { config } from './config'
 import { getStore, getState } from './store/store';
 import Head from './components/Head';
@@ -32,6 +33,7 @@ ReactDOM.render(<Provider store={store}>
                 }}
             />
             <Route exact path="/interview/:interviewID" component={Interview}/>
+            <Route exact path="/behavior" component={Behavior} />
             <Route exact path="/admin" component={Admin} />
             <Route exact path="*" component={NotFound } />
             </Switch>

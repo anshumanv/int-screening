@@ -74,6 +74,7 @@ h1 {
 body {
   background-color: #282c34;
   color: #61dafb;
+  overflow-y: hidden;
 }
 
 .ant-layout {
@@ -120,4 +121,11 @@ body {
 .question {
   display: flex;
   justify-content: center;
+}
+
+.behavior-root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh
 }

@@ -40,9 +40,8 @@ class Quiz extends Component {
       })
     }
     if(qIndex === questions.length -1){
-      return window.location.pathname = '/';
+      return window.location.pathname = '/behavior';
     }
-    Array.from(document.querySelectorAll('input[type="choices"]:checked'), input => input.checked = false );
     this.setState({
       qIndex: newIndex
     })
