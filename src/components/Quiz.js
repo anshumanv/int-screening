@@ -36,7 +36,7 @@ class Quiz extends Component {
     console.log('asda')
     const newIndex = this.state.qIndex + 1;
     if(e.target.value === this.state.curQuestion['Answer']) {
-      let newWeight = this.state.totalWeight += this.state.questions[this.state.qIndex]['weight']
+      let newWeight = this.state.totalWeight + this.state.questions[this.state.qIndex]['weight']
       this.setState({
         totalWeight: newWeight
       })
