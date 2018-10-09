@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as firebase from 'firebase';
 import { signedIn } from '../actions/authActions';
-import { Button } from 'antd';
+import { message, Button } from 'antd';
 
 class Auth extends React.Component {
   handleSignIn = () => {
@@ -18,7 +18,8 @@ class Auth extends React.Component {
         window.location = '/interview/Web'
       })
       .catch(function(error) {
-        throw Error(error);
+        message.warning('Kindly sign-in with your account!',4)
+        console.log(error);
       });
   };
 
