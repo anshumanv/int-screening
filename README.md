@@ -4,11 +4,14 @@
 
 int-screening is a candidate screening automation tool build to filter candidates/students for a role.
 
-
+Stack
+* React - Frontend library
+* Redux - State management
+* Firebase - Authentication and database
 
 ## Development
 
-Once you have clone the repository, in the repository folder -
+Once you have cloned the repository, in the repository folder -
 
 ```sh
 npm i
