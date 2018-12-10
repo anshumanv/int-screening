@@ -15,6 +15,9 @@ import './App.css'
 // firebase.initializeApp(config);
 
 class App extends Component {
+    componentDidMount(){
+        document.title = "Int-screening"
+    }
     render() {
         return(
             <Start />
