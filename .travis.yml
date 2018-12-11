@@ -1,0 +1,21 @@
+language: node_js
+node_js:
+- '9'
+cache:
+  yarn: true
+  directories:
+  - node_modules
+before_install:
+  - npm install -g yarn firebase-tools
+install:
+  - yarn
+script:
+  - yarn build
+
+after_success:
+  - firebase use default --token $FIREBASE_TOKEN
+  - travis_wait firebase deploy -m "Travis deploy" --non-interactive --token $FIREBASE_TOKEN
+
+branches:
+  only:
+    - master
