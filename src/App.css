@@ -123,9 +123,41 @@ body {
   justify-content: center;
 }
 
+.questions {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  justify-content: center
+}
+
 .behavior-root {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh
+}
+
+.question-count {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.right-nav-header {
+  font-size: 2rem;
+}
+
+.right-nav {
+  max-width: 20vw;
+  height: 100vh;
+  justify-content: center;
+  font-size: 3rem;
+}
+
+.question-section {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
