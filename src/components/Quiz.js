@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {Radio, Button} from 'antd';
-import Question from './Question';
 import * as firebase from 'firebase';
+import QuestionNavigator from './QuestionNavigator';  
+import Question from './Question';
 
 class Quiz extends Component {
   constructor(props) {
@@ -53,13 +54,20 @@ class Quiz extends Component {
     return (
         <div className="quiz">
           {!!questions.length ?
-          <div>
-          <Question content={questions[qIndex]['question']} />
-            <Radio.Button onClick={this.handleSubmit} value="a">{questions[qIndex]['optionA']}</Radio.Button>
-            <Radio.Button onClick={this.handleSubmit} value="b">{questions[qIndex]['optionB']}</Radio.Button>
-            <Radio.Button onClick={this.handleSubmit} value="c">{questions[qIndex]['optionC']}</Radio.Button>
-            <Radio.Button onClick={this.handleSubmit} value="d">{questions[qIndex]['optionD']}</Radio.Button>
-        </div>:  <Button shape="circle" loading />}
+          <div className="questions">
+            <div className="question-section">
+            <Question content={questions[qIndex]['question']} />
+            <div className="options">
+              <Radio.Button onClick={this.handleSubmit} value="a">{questions[qIndex]['optionA']}</Radio.Button>
+              <Radio.Button onClick={this.handleSubmit} value="b">{questions[qIndex]['optionB']}</Radio.Button>
+              <Radio.Button onClick={this.handleSubmit} value="c">{questions[qIndex]['optionC']}</Radio.Button>
+              <Radio.Button onClick={this.handleSubmit} value="d">{questions[qIndex]['optionD']}</Radio.Button>
+            </div>
+        </div>
+        <QuestionNavigator questions={questions} qIndex={qIndex} />
+          </div>
+            :  <Button shape="circle" loading />}
+          
         </div>
           
           
