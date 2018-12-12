@@ -61,21 +61,21 @@ class Quiz extends Component {
     return (
         <div className="quiz">
           {!!questions.length ?
-          <div className="questions">
-            <div className="question-section">
-            <Question content={questions[qIndex]['question']} />
-            <div className="options">
-              <Radio.Group value={this.state.selectedOption} buttonStyle="solid" onChange={this.updateOption}>
-                <Radio.Button value="a">{questions[qIndex]['optionA']}</Radio.Button>
-                <Radio.Button value="b">{questions[qIndex]['optionB']}</Radio.Button>
-                <Radio.Button value="c">{questions[qIndex]['optionC']}</Radio.Button>
-                <Radio.Button value="d">{questions[qIndex]['optionD']}</Radio.Button>
-              </Radio.Group>
+            <div className="questions">
+              <div className="question-section">
+                <Question content={questions[qIndex]['question']} />
+                <div className="options">
+                  <Radio.Group value={this.state.selectedOption} buttonStyle="solid" onChange={this.updateOption}>
+                    <Radio.Button value="a">{questions[qIndex]['optionA']}</Radio.Button>
+                    <Radio.Button value="b">{questions[qIndex]['optionB']}</Radio.Button>
+                    <Radio.Button value="c">{questions[qIndex]['optionC']}</Radio.Button>
+                    <Radio.Button value="d">{questions[qIndex]['optionD']}</Radio.Button>
+                  </Radio.Group>
+                </div>
+                <Button onClick={this.handleSubmit} style={{marginTop: '20px', maxWidth: '200px'}} type="primary" block>Submit</Button>
+              </div>
+              <QuestionNavigator questions={questions} qIndex={qIndex} />
             </div>
-            <Button onClick={this.handleSubmit} style={{marginTop: '20px', maxWidth: '200px'}} type="primary" block>Submit</Button>
-        </div>
-        <QuestionNavigator questions={questions} qIndex={qIndex} />
-          </div>
             :  <Button shape="circle" loading />}
           
         </div>
